@@ -17,10 +17,16 @@ class Hotel
         Name = name;
         Rating = rating;
     }
+    public override string ToString()
+    {
+        return $"Hotel: {Name}\n" +
+            $"Rating: {Rating}";
+    }
 }
 class Room
 {
     public int ID {get; set;}
+    public int RoomNr {get; set;}
     public int Price {get; set;}
     public bool Status {get; set;}
     public int HotelID {get; set;}
@@ -37,6 +43,11 @@ class Room
         Status = status;
         ID = id;
         HotelID = hotelID;
+        RoomNr = id;
+    }
+    public override string ToString()
+    {
+        return $"Hotel: {RoomNr}";
     }
 }
 class Guest
@@ -60,6 +71,14 @@ class Guest
         Age = age;
         PhoneNr = phoneNr;
         Email = email;
+    }
+    public override string ToString()
+    {
+        return $"ID: {ID}\n" +
+            $"Name: {Name}\n" +
+                $"Age: {Age}\n" +
+                    $"Phone: {PhoneNr}\n" +
+                        $"Email: {Email}";
     }
 }
 class Booking

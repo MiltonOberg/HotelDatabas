@@ -10,21 +10,26 @@ class Program
 {
     public static void Main()
     {
-        Console.WriteLine("1. Bokningar");
-        Console.WriteLine("2. Hotell");
-        Console.WriteLine("3. Rum");
-        int choice = int.Parse(Console.ReadLine());
-        switch(choice){
-            case 1:
-                UIConsole.GetBookings();
-                break;
-            case 2:
-                UIConsole.GetHotels();
-                break;
-            case 3:
-                UIConsole.GetGuest();
-                break;
-        }
+        do{
+            
+            int choice = MenuHandler.Menu(MenuHandler.MainMenu());
+
+            switch(choice){
+                case 0:
+                    UIConsole.GetBookings();
+                    break;
+                case 1:
+                    UIConsole.GetHotels();
+                    break;
+                case 2:
+                    UIConsole.GetGuest();
+                    break;
+                case 3:
+                    UIConsole.BookRoom();
+                    break;
+            }
+            Thread.Sleep(3000);
+        }while(true);
     }
 }
 
@@ -70,6 +75,15 @@ class HotelDatabase
 
         var guests = connection.Query<Guest>(sql).AsList();
         return guests;
+    }
+    public static List<Room> GetAvalibleRooms()
+    {
+        string sql = "SELECT rooms.RoomNr, rooms.Price " +
+            "FROM rooms " +
+                "WHERE rooms.Status = 1 ";
+        
+        var avalibleRooms = connection.Query<Room>(sql).AsList();
+        return avalibleRooms;
     }
 }
 
