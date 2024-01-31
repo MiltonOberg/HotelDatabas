@@ -33,7 +33,7 @@ class HotelDatabase
 {
     static string connectionString = "server=localhost;database=hotell;uid=root;pwd=;";
     static IDbConnection connection = new MySqlConnection(connectionString);
-
+    
     public static List<Hotel> GetHotels()
     {
         string sql = "SELECT Name, Rating " +  
@@ -58,11 +58,8 @@ class HotelDatabase
                 "INNER JOIN reservations ON guests.ID = reservations.GuestID " +
                     "INNER JOIN rooms ON reservations.RoomID = rooms.ID " +
                         "INNER JOIN hotels ON rooms.HotelID = hotels.ID; ";
-                        
-
 
         var bookings = connection.Query<Booking>(sql).AsList();
-        
         
         return bookings;
     }
